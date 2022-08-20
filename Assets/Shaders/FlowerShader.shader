@@ -85,6 +85,8 @@ Shader "Unlit/FlowerShader"
 // colorは乱数でよしなに出す
 
                 color = lerp(color, float4(hue_to_rgb(rand(floor(uv * n) / n)), 1), petal);
+// * 2はTimecircleをアニメーションするのを合わせている
+
                 float cap = draw_circle(st + 0.5, pow(size, 2) * 0.15);
                 return lerp(color, float4(0.99, 0.78, 0, 1), cap);
             }
