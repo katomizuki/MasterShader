@@ -36,13 +36,14 @@ Shader "Unlit/HexShader"
             {
                 // 0.02を足す。
                 st.x += 0.02;
-                // 
+                
                 float2 g = float2(0.692, 0.4) * 0.5;
                 float r = 0.005;
-// 
+// p1時間によって動くようにする
+
                 float2 p1 = mod(st, g) - g * 0.5;
                 float2 p2 = mod(st + g * 0.5, g) - g * 0.5;
-                // 
+                
                 return min(hex(p1, r), hex(p2, r));
             }
 
