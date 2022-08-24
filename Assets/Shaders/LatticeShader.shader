@@ -32,6 +32,7 @@ Shader "Unlit/LatticeShader"
             float box(float2 st, float t)
             {
 // tには0~0.5がランダムで入ってくる
+
                 st = rotate(st, t * 2.05 * PI / 4);
 // ｔ×sizeでサイズを出す
 
