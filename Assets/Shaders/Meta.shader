@@ -48,7 +48,7 @@ Shader "Unlit/Meta"
 // アスペクト比を調整する
                 i.uv = screen_aspect(i.uv);
 
-                return lerp(float4(0.80, 0.16, 0.16, 1), float4(0.15, 0.14, 0.14, 1), meta_xx(i.uv));
+                return lerp(float4(0.80, 0.1, 0.1, 1), float4(0.15, 0.1, 0.1, 1), meta_xx(i.uv));
             }
             ENDCG
         }
