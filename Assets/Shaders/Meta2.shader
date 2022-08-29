@@ -37,10 +37,13 @@ Shader "Unlit/Meta2"
 
             float meta_xx(float2 st)
             {
+// 
                 float d = circle(move(st, 0)) * circle(move(st, 4)) * circle(move(st, 8));
 // 時間×2分割
                 float ft = frac(_Time.y * 2);
+// 分割した座標で0.6 ~ 0.8でsmoothstep
                 float a = smoothstep(0.6, 0.8, ft) * (1 - smoothstep(0.8, 1.0, ft));
+//
                 return step(lerp(0.25, 1, a), abs(sin(d * 150)));
             }
 
