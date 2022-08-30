@@ -20,6 +20,7 @@ Shader "Unlit/HexShader"
             float hex(float2 p, float2 r)
             {
             // 絶対値を出す
+
                 p = abs(p);
                 float k = max(p.x + p.y * 0.57735, p.y * 1.1547);
                 return max(p.x - r.y, k - r.x);
