@@ -53,7 +53,7 @@ Shader "Unlit/DomainWarpShading"
 
                 for (int i = 0; i < 7; ++i)
                 {
-// aにかける
+// aにNoiseをかけてたす
 
                     v += a * noise(st);
 // 実際に回転させる
