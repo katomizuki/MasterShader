@@ -45,9 +45,9 @@ Shader "Unlit/RotateShader"
 
                 st = mul(rotate(sin(t) * PI), st);
                 st += 0.5;
-
+                                                    
                 return box(st, 0.4);
-            }
+            }                       
             ENDCG
         }
     }
