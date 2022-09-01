@@ -32,7 +32,7 @@ public class MeshGenerator : MonoBehaviour
     {
         0,2,1,0,3,2
     };
-// メッシュの包含範囲を自動的に計算する どの範囲をカメラに移してメッシュが投影されているかをメッシュに伝える。
+// 領域と法線を自動で計算する。
     mesh.RecalculateBounds();
 
     MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>();
