@@ -19,7 +19,9 @@ Shader "Unlit/TransformGridShader"
 
             float2 transform_uv(float2 uv, float2 radius)
             {
+// 距離
                 float distance = length(0.5 - uv);
+
                 float distortion = 1 - smoothstep(radius * 10, radius, distance);
                 return uv + (0.5 - uv) * distortion;
             }
@@ -34,7 +36,7 @@ Shader "Unlit/TransformGridShader"
 //uvの移動
 
                 float2 uv = transform_uv(i.uv, radius);
-//7分割
+//7分割 a + x * (b - a)
 
                 float2 fst = frac(uv * 7);
 
