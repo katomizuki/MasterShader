@@ -227,6 +227,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombunny (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1306413142486574, guid: 09df32d15510946c1bd4325af6219685, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4993071210865136, guid: 09df32d15510946c1bd4325af6219685, type: 3}
       propertyPath: m_RootOrder
       value: 5
