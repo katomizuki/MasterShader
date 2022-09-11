@@ -2,13 +2,15 @@ Shader "Unlit/CameraDistance"
 {
     Properties
     {
-        [NoScaleOffset] _NearTex ("NearTexture", 2D) = "white" {}
+         [NoScaleOffset] _NearTex ("NearTexture", 2D) = "white" {}
+        //テクスチャー(オフセットの設定なし)
         [NoScaleOffset] _FarTex ("FarTexture", 2D) = "white" {}
     }
     SubShader
     {
         // 透明度に関する設定 透明関連にしたい場合はTransparent、それ以外だとOpaqueくらいに覚えておく
         Tags { "RenderType"="Transparent" }
+        Blend SrcAlpha OneMinusSrcAlpha
 
         Pass
         {
@@ -19,10 +21,10 @@ Shader "Unlit/CameraDistance"
             #include "UnityCG.cginc"
             #include "Common.cginc"
 
+
             sampler2D _NearTex;
             sampler2D _FarTex;
             
-
             struct appdata
             {
                 float4 vertex : POSITION;
@@ -39,6 +41,7 @@ Shader "Unlit/CameraDistance"
             v2f vert (appdata v)
             {
                 v2f o;
+                o.uv = v.uv;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.worldPos = mul(unity_ObjectToWorld, v.vertex); // ローカル座標系をワールド座標系に変換
                 return o;
