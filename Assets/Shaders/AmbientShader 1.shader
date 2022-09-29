@@ -2,7 +2,7 @@ Shader "Unlit/AmbientShader 1"
 {
     Properties
     {
-        _MainColor("Main Color", Color) = "white" {}
+        _MainColor("Main Color", Color) = (0, 0, 0, 1)
         _DiffuseShade("Diffuse Shade", Range(0, 1)) = 0.5
     }
     SubShader
