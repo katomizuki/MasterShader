@@ -94,10 +94,10 @@ Shader "Unlit/ShadowShader"
                 return o;
             }
 
-            float4 frag(v2f i)
+            float4 frag(v2f i) : SV_Target
             {
                 // 同様
-                SHADOW_CASTER_FRAGMENT(i);
+                SHADOW_CASTER_FRAGMENT(i)
             }
             ENDCG
             }
