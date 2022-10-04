@@ -73,26 +73,39 @@ Shader "Unlit/namishader"
 
                 float4 waveColor = 0;
                 float m_dist = 100;
-
+// 自身を含む周囲のマスを探索
                 for (int y = -1; y <= 1; y++)
                 {
                     for (int x = -1; x <= 1; x++)
                     {
+                        // 周辺のエリア
                         float2 neighbor = float2(x,y);
 
+                        // 点のxy座標
                         float2 p = 0.5 + 0.5 * sin(random2(ist + neighbor) + _Time.x * _WaveSpeed);
-
+                        // 点と処理対象のピクセルとの距離ベクトル
                         float2 diff = neighbor + p - fst;
+                        // 距離を更新していく
                         m_dist = min(m_dist, length(diff));
 
+                        //
                         waveColor = lerp(_WaterColor,_FoamColor, smoothstep(1 - _FormPower, 1, m_dist));
                     }
                 }
 
+                // 深度の計算
+                // _CameraDepthTextureがCameraのDepthモードにすると深度テクスチャが代入する。テクスチャ座標を適切なものに変換。（プラットフォームの違いを吸収してくれる）
+                //SAMPLE_DEPTH_TEXTURE_PROJで深度テクスチャを参照しレンダリングしてくれる。
+                //SAMPLE_DEPTH_TEXTURE_PROJ=> 
                 float4 depthSample = SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD((i.screenPos)));
+                // 深度テクスチャをLinerEyeDepthに入れればカメラ起点での深度をとってこれる。カメラのnearとfarの線形をしてくれる
+                
                 half depth = LinearEyeDepth(depthSample);
+                //　オブジェクトのカメラ深度値から スクリーン深度値を引くことで交差している部分(0になる）がわかる。
                 half screenDepth = depth - i.screenPos.w;
+                // 交差している部分ほど色をつけたいので1から引いている。screenDepthを正規化。
                 float edgeLine = 1 - saturate(_DepthFactor * screenDepth);
+                // edgerLineを閾値として色を出力
                 fixed4 finalColor = lerp(waveColor, _EdgeColor, edgeLine);
 
                 return finalColor;
