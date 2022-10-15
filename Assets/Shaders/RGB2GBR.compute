@@ -1,0 +1,13 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel RGB2BGR
+//結果をここに入れてC#側で受け取る。
+RWTexture2D<float4> Result;
+// C#側から受け取るTextureを設定。
+Texture2D<float4> Texture;
+
+[numthreads(8,8,1)]
+void RGB2BGR (uint3 id : SV_DispatchThreadID)
+{
+    // 入ってくるTextureのRGB値の順番を入れ替える。
+    Result[id.xy] = float4(Texture[id.xy].z, Texture[id.xy].x, Texture[id.xy].y, Texture[id.xy].w);
+}
