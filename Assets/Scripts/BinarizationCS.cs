@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,7 +30,9 @@ public class BinarizationCS : MonoBehaviour
         }
         // RenderTextureの初期化
         _renderTexture = new RenderTexture(_texture2D.width, _texture2D.height, 0, RenderTextureFormat.ARGB32);
+       // シェーダで読み書きするにはこれをtrueにする必要がある
         _renderTexture.enableRandomWrite = true;
+        // 作成
         _renderTexture.Create();
         
         // Binarizationのカーネルインデックス(0)の取得
