@@ -1,0 +1,67 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel InvertHue
+
+RWTexture2D<float4> Result;
+Texture2D<float4> Texture;
+
+[numthreads(8,8,1)]
+void InvertHue (uint3 id : SV_DispatchThreadID)
+{
+    float h, s, v;
+    float r = Texture[id.xy].x;
+    float g = Texture[id.xy].y;
+    float b = Texture[id.xy].z;
+    float maxValue = max(r, max(g, b));
+    float minValue = min(r, min(g, b));
+
+    if(maxValue == minValue){
+        h = 0;
+    } else if(minValue == b){
+        h = 60 * (g - r) / (maxValue - minValue) + 60;
+    } else if(minValue == r){
+        h = 60 * (b - g) / (maxValue - minValue) + 180;
+    } else if(minValue == g){
+        h = 60 * (r - b) / (maxValue - minValue) + 300;
+    }
+
+    s = maxValue - minValue;
+    v = maxValue;
+
+    //-----------------
+    //- 色相を反転させる -
+    //-----------------
+    h = fmod(h + 180, 360);
+
+    //----------------
+    //-  HSV -> RGB  -
+    //----------------
+    float c = s;
+    float h2 = h / 60;
+    float x = c * (1 - abs(fmod(h2, 2) - 1));
+
+    r = v - c;
+    g = v - c;
+    b = v - c;
+
+    if(h2 < 1){
+        r += c;
+        g += x;
+    } else if(h2 < 2){
+        r += x;
+        g += c;
+    } else if(h2 < 3){
+        g += c;
+        b += x;
+    } else if(h2 < 4){
+        g += x;
+        b += c;
+    } else if(h2 < 5){
+        r += x;
+        b += c;
+    } else if(h2 < 6){
+        r += c;
+        b += x;
+    }
+    
+    Result[id.xy] = float4(r, g, b,1); 
+}
