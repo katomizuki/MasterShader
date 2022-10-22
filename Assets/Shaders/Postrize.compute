@@ -1,0 +1,15 @@
+#pragma kernel Postrize
+
+RWTexture2D<float4> Result;
+Texture2D<float4> Texture;
+int3 Step;
+
+[numthreads(8,8,1)]
+void Postrize(uint3 id : SV_DispatchThreadID)
+{
+    // テクスチャ座標 floorで各マスを個別に制御 Step=>枠数   　＋（1 割る 階層　＊ 2)
+    float r = clamp(floor(Texture[id.xy].x * Step.x) / Step.x + (1.0 / (Step.x * 2)), 0, 1);
+    float g = clamp(floor(Texture[id.xy].y * Step.y) / Step.y + (1.0 / (Step.y * 2)), 0, 1);
+    float b = clamp(floor(Texture[id.xy].y * Step.y) / Step.z + (1.0 / (Step.z * 2)), 0, 1);
+    Result[id.xy] = float4(r, g, b, 1);
+}
