@@ -43,7 +43,7 @@ Shader "Unlit/b"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed color = tex2D(_MainTex,i.uv);
+                fixed4 color = tex2D(_MainTex,i.uv);
                 color.rgb = 1 - color.rgb;
                 return color;
             }

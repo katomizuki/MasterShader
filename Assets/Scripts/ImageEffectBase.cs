@@ -12,7 +12,7 @@ public class ImageEffectBase : MonoBehaviour
         enabled = material && material.shader.isSupported;
     }
 
-    private void OnRenderImage(RenderTexture source, RenderTexture destination)
+    public virtual void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
         Graphics.Blit(source, destination, material);
     }
