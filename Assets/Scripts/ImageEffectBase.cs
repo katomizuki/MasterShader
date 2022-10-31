@@ -7,7 +7,7 @@ public class ImageEffectBase : MonoBehaviour
     public Material material;
 
 
-    void Start()
+    public virtual void Start()
     {
         enabled = material && material.shader.isSupported;
     }
