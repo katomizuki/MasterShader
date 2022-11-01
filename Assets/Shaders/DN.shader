@@ -1,15 +1,12 @@
-Shader "Unlit/MV"
+Shader "Unlit/DN"
 {
     Properties
     {
         [HideInInspector]
-        _MainTex("Texture",2D) = "white" {}
+        _MainTex("Texture", 2D) = "white" {}
     }
     SubShader
     {
-        Cull Off
-        ZWrite Off
-        ZTest Always
 
         Pass
         {
@@ -20,14 +17,16 @@ Shader "Unlit/MV"
             #include "UnityCG.cginc"
 
             sampler2D _MainTex;
-            sampler2D _CameraMotionVectorsTexture;
+            sampler2D _CameraDepthNormalsTexture;
 
+            
             fixed4 frag (v2f_img i) : SV_Target
             {
-                float2 motion = tex2D(_CameraMotionVectorsTexture, i.uv).xy;
-                motion.xy = abs(motion.xy);
-                motion.xy *= 10;
-                return float4(motion.xy, 0, 1);
+                float depth;
+                float3 normal;
+                DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, i.uv), depth, normal);
+                return float4(normal, 1);
+                // return float4(depth.rgb, 1);
             }
             ENDCG
         }
