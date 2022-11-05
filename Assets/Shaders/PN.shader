@@ -51,8 +51,13 @@ Shader "Unlit/PN"
 
                 return lerp(v00v10, v01v11, p.y) * 0.5 + 0.5;
             }
+            float _NoiseScale;
+            float _NoiseAspect;
             fixed4 frag (v2f_img i) : SV_Target
             {
+                i.uv *= _NoiseScale;
+                i.uv.x *= _NoiseAspect;
+                return perlinNoise(i.uv);
             }
             ENDCG
         }
