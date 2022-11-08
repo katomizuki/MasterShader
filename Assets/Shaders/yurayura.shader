@@ -33,7 +33,7 @@ Shader "Unlit/yurayura"
                 v2f o;
                 // クリップ座標系に変換してから
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_UV(v.texcoord, _MainTex);
+                o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
                 float amp = 0.5 * sin(_Time * 100 + v.vertex.x * 100);
                 o.vertex.xyz = float3(o.vertex.x , o.vertex.y + amp, o.vertex.z);
                 return o;
