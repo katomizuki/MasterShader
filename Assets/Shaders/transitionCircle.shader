@@ -46,16 +46,26 @@ Shader "Unlit/transitionCircle" {
             }
 
             fixed4 frag (v2f i) : SV_Target {
-                float2 div = float2(_CircleSideNum, _CircleSideNum * _ScreenParams.y / _ScreenParams.x);
-                // 円の数
+                // アスペクト比
+                float aspect = _ScreenParams.y / _ScreenParams.x;
+                // X軸のマス目とy軸のマス目
+                float2 div = float2(_CircleSideNum, _CircleSideNum * aspect);
+                // uv座標にマス目をかけることで実際に格子上にする
                 float2 st = i.uv * div;
+                // floorで整数を切り取りマス目を個々で制御できるようにする
                 float2 i_st = floor(st);
-                // 正規化した方向
+                // transitionしたい方向ベクトルを追加して正規化する
                 float2 dir = normalize(_Direction);
                 // 最後の円が大きくなるタイミングを加味したトランジション
-                float value = _CircleValue * (dot(div - 1.0, abs(dir)) * _Threshold + 2.0);
+                // CircleValeを乗算して(0~1)の範囲になるようにする
+                // 2.0は 調整値
+                float absDir = abs(dir);// 0 ~ 1
+                float dotValue = dot(div - 1.0, absDir);
+                float value = _CircleValue * (dotValue * _Threshold + 2.0);
+                // トランジションする方向が正か負か
                 float2 sg = sign(dir);
-                float a = 1;
+                // 操作する透明度を宣言
+                float alpha = 1;
                 // 自身と周囲8つの円を描画
                 for (int i = -1; i <= 1; i++) {
                     for (int j = -1; j <= 1; j++) {
@@ -64,11 +74,11 @@ Shader "Unlit/transitionCircle" {
                         float v = value - dot(f, abs(dir)) * _Threshold;
                         float2 f_st = frac(st) * 2.0 - 1.0;
                         float ci = circle(f_st  - float2(2.0 * i, 2.0 * j));
-                        a = min(a, step(v, ci));
+                        alpha = min(alpha, step(v, ci));
                     }
                 }
                 fixed4 col = 0.0;
-                col.a = a;
+                col.a = alpha;
                 return col;
             }
             ENDCG
