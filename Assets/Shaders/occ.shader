@@ -100,6 +100,7 @@ Shader "Unlit/occ"
                 // rayHeightからレイステップ一回分を引く
                 prevHeight -= rayHeight - rayStep.y;
 // nextHeightのpreveHeightの差分でnextHeighを
+                /// nextheightとprevHeightの2点間の高さの差を求めて、その差分でnextHeightを割れば閾値を出せる。
                 float weight = nextHeight / (nextHeight - prevHeight);
                 // 衝突したuv座標とその一個前のuv座標を
                 uv = lerp(nextObjPoint, prevObjPoint, weight);
