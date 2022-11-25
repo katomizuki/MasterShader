@@ -22,6 +22,7 @@ fixed rand(fixed2 uv, fixed2 size) {
    return frac(sin(dot(frac(uv / size), fixed2(12.9898, 78.233))) * 43758.5453) * 0.99999;
 }
 
+// 勾配ベクトル
 fixed2 gradientVector(fixed2 uv, fixed2 size) {
    uv = frac(uv / size);
    uv = fixed2(dot(frac(uv / size), fixed2(127.1, 311.7)), dot(frac(uv / size), fixed2(269.5, 183.3)));
