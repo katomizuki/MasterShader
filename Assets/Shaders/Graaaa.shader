@@ -15,7 +15,7 @@ Shader "Unlit/Graaaa"
         // Shaderで計算した色 * SrcFactor + 既に画面に描画されている色 * DstFactor
         // 一般的な透過設定
         Blend SrcAlpha OneMinusAlpha
-        // GrabPassでカメラのテキスちゃを参照する
+        // GrabPassでカメラのテキスちゃを参照する https://qiita.com/8March/items/4d4282263859d05f4d4b#oneminussrcalpha
         GrabPass { "_BackgroundTexture" } 
 
         Pass
