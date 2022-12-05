@@ -35,14 +35,17 @@ public class Blur : MonoBehaviour
         UpdateWeights();
         _isInitizlized = true;
     }
-
+// ガウしアンブラーの公式から。
     private void UpdateWeights()
     {
         float total = 0;
+        // _blurValue=>係数
         float d = _blurValue * _blurValue * 0.001f;
         for (int i = 0; i < _weights.Length; i++) {
             float x = 1.0f + i * 2f;
+            // ネイピア数を返してくれる。数字定数の一つ。自然定数のそこ
             float w = Mathf.Exp(-0.5f * (x * x) / d);
+                //これを重みづけとして配列に入れる。
             _weights[i] = w;
             if (i > 0) {
                 w *= 2.0f;

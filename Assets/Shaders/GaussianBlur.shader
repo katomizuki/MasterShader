@@ -55,6 +55,7 @@ Shader "Unlit/GaussianBlur"
                     col += tex2D(_MainTex, i.uv - (_Offset.xy * j)) * _Weights[j];
                 }
 // xとyで切り離して処理することができる。
+                // ふたつループがあるのは、中心から左右（あるいは上下）にテクセルをフェッチするためそれぞれ2回に分けて書いているだけです。
                 [unroll]
                 for (int j = 0; j < samplingCount; j++)
                 {
