@@ -56,6 +56,7 @@ Shader "Unlit/ProjectionTextureShadow"
                 float4 projectorTex = tex2D(_ShadowProjectorTexture1,i.projectorSpacePos.xy);
                 fixed3 isOut = step((i.projectorSpacePos - 0.5) * sign(i.projectorSpacePos),0.5);
                 float alpha = isOut.x * isOut.y * isOut.z;
+                // 同様に0or1になる
                 alpha *= step(-dot(lerp(-_ShadowProjectorPos1.xyz, _ShadowProjectorPos1.xyz - i.worldPos, _ShadowProjectorPos1.w), i.worldNormal),0);
                 fixed4 col = tex2D(_MainTex, i.uv);
                 return lerp(1,1 - projectorTex.a, alpha) * col;

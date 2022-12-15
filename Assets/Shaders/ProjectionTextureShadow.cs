@@ -31,6 +31,7 @@ public class ProjectionTextureShadow : MonoBehaviour
         _camera.clearFlags = CameraClearFlags.Color;
         _camera.backgroundColor = Color.white;
         // 点滅を防ぐ
+        // HDRを無効にする
         _camera.allowHDR = false;
     }
 
@@ -40,7 +41,6 @@ public class ProjectionTextureShadow : MonoBehaviour
         {
             UpdateSettings();
         }
-
         SetMaterialParams();
     }
 
@@ -60,19 +60,25 @@ public class ProjectionTextureShadow : MonoBehaviour
 
     private void UpdateRenderTexture()
     {
+        // RenderTextureの更新を行なっている。
         _renderTexture = RenderTexture.GetTemporary(_renderTextureSize, 
             _renderTextureSize, 
             16,
             RenderTextureFormat.ARGB32);
+
         _camera.targetTexture = _renderTexture;
     }
 
     private void SetMaterialParams()
     {
+        // カメラのビュー行列
         var viewMatrix = _camera.worldToCameraMatrix;
+        // プロジェクション行列
         var projectionMatrix = GL.GetGPUProjectionMatrix(_camera.projectionMatrix, true);
+        // 行列、テキスちゃをそれぞれセット
         _material.SetMatrix(_matrixVpId, projectionMatrix * viewMatrix);
         _material.SetTexture(_textureId, _renderTexture);
+        // プロジェクターの座標を入れる　。
         _material.SetVector(_posId, GetProjectorPos());
     }
 
@@ -89,12 +95,12 @@ public class ProjectionTextureShadow : MonoBehaviour
             projectorPos = transform.position;
             projectorPos.w = 1;
         }
-
         return projectorPos;
     }
 
     private void ReleaseTexture()
     {
+        // 解放
         _renderTexture.Release();
     }
 
