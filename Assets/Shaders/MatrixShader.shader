@@ -41,13 +41,14 @@ Shader "Unlit/MatrixShader"
                 }
                 return 0.;
             }
-
+// fpos 
             float char(float2 st, float n){
                     st.x = st.x * 2. - .5;
                     st.y = st.y * 1.2 - .1;
  
                     float2 ipos = floor(st * float2(3., 5.));
- 
+
+                // 浮動小数の剰余を求める
                     n = floor(fmod(n, 20. + _Density));
  
                     float digit = 0.0;
@@ -96,12 +97,18 @@ Shader "Unlit/MatrixShader"
 
             fixed4 frag (v2f_img i) : SV_Target
             {
+                // 格子Index
                 float2 ipos = floor(i.uv * _Grid);
+                // 0 ~ 1 
                 float2 fpos = frac(i.uv * _Grid);
- 
+
+                // y 軸に動かしたいので格子単位で動かす。
                 ipos.y += floor(_Time.y * max(_SpeedMin, _SpeedMax * noise(ipos.x)));
+                // 文字に変換する文字列数字
                 float charNum = simplexNoise2D(ipos);
-                float val = char(fpos, (20. + _Density) * charNum);
+                // val(0かNoise値）
+                float val = char(fpos, (20 + _Density) * charNum);
+                // valで
                 return fixed4(0, val, 0, 1.0);
             }
             ENDCG
