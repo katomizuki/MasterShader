@@ -36,7 +36,8 @@ Shader "Unlit/oilEffect"
                 o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
                 return o;
             }
-
+// kuwahara Filterというフィルタを利用している。ある点Aを基準にして左下、左上、右下、右上の領域に分ける。この領域の大きさがRadiusになる
+            //その領域のうち一番色が均質なものを一つ選び出す。それを点Aに適用させる。
             fixed4 frag (v2f i) : SV_Target
             {
                 half2 uv = i.uv;
@@ -57,6 +58,7 @@ Shader "Unlit/oilEffect"
                 float2 start[4] = {{-_Radius, -_Radius}, {-_Radius, 0}, {0, -_Radius}, {0, 0}};
                 float2 pos;
                 float3 col;
+                // 四つの領域 https://qiita.com/Cartelet/items/5c1c012c132be3aa9608
                 for (int k = 0; k < 4; k++) {
                     for(int i = 0; i <= _Radius; i++) {
                         for(int j = 0; j <= _Radius; j++) {
