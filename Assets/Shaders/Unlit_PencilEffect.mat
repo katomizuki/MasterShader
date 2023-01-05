@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Unlit_vhsTaplate 1
-  m_Shader: {fileID: 4800000, guid: ca4be68dd0b26457f9732f91d773821b, type: 3}
+  m_Name: Unlit_PencilEffect
+  m_Shader: {fileID: 4800000, guid: bef8fe5bbd2904ad781b26c47b806b63, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -20,19 +20,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SecondaryTex:
-        m_Texture: {fileID: 2800000, guid: 7cbc97575db474a67969f90372afc379, type: 3}
+        m_Texture: {fileID: 2800000, guid: f81094832d834c64d93b198cb16b6a3e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Intensity: 0.64
-    - _OffsetColor: 0.009
-    - _OffsetDistortion: 78.87251
-    - _OffsetNoiseX: 0.37483126
-    - _OffsetNoiseY: 0.81404644
-    - _OffsetPosY: 0
+    - _ColorThreshold: 0.426
+    - _GradThresh: 0.0078
     m_Colors: []
   m_BuildTextureStacks: []
