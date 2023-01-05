@@ -29,10 +29,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Intensity: 0.64
-    - _OffsetColor: 0.009
-    - _OffsetDistortion: 78.87251
-    - _OffsetNoiseX: 0.37483126
-    - _OffsetNoiseY: 0.81404644
+    - _OffsetColor: 0.0028068256
+    - _OffsetDistortion: 480
+    - _OffsetNoiseX: 0.5980352
+    - _OffsetNoiseY: 1.4035822
     - _OffsetPosY: 0
     m_Colors: []
   m_BuildTextureStacks: []
