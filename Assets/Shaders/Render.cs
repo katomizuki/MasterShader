@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+[ExecuteInEditMode]
 public class Render : MonoBehaviour
 {
     [SerializeField] private Material _material;
