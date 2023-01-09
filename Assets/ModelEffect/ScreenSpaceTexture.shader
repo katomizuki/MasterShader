@@ -68,6 +68,8 @@ Shader "Unlit/ScreenSpaceTexture"
             float _Zoom;
             float _SpeedX;
             float _SpeedY;
+            // vpos->スクリーンスペースのピクセル位置を簡単に受け取ることができるセマンティクス。
+            // https://docs.unity3d.com/ja/current/Manual/SL-ShaderSemantics.html
             fixed4 frag(float4 i : VPOS) : SV_Target {
                 float2 offset = float2(_Time.y * _SpeedX, _Time.y * _SpeedY) / _Zoom; 
                 float2 uv = (i.xy / _ScreenParams.xy) + offset; 
