@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Unlit_VertexIDColor 1
-  m_Shader: {fileID: 4800000, guid: c29d2b33adb6545cc9ed4114a91a22da, type: 3}
+  m_Name: Unlit_Flagandlight
+  m_Shader: {fileID: 4800000, guid: b792a863fa7f04a15bf1f38f99922446, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -24,11 +24,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Val: 2
-    - _Val2: 2
-    - _Val3: 2
-    m_Colors:
-    - _Color1: {r: 0.48859853, g: 0.9811321, b: 0.06016379, a: 1}
-    - _Color2: {r: 0.9528302, g: 0.8423585, b: 0.049439307, a: 1}
-    - _Color3: {r: 0.9245283, g: 0.056692798, b: 0.056692798, a: 1}
+    - _Ambient: 0.394
+    - _WaveSpeed: 1.65
+    - _WaveStrength: 0.254
+    m_Colors: []
   m_BuildTextureStacks: []

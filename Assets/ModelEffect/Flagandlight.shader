@@ -1,19 +1,12 @@
-Shader "Unlit/Fog"
+Shader "Unlit/Flagandlight"
 {
     Properties
     {
-        [Header(Textures and color)]
-        [Space]
-        _MainTex("Fog texture", 2D) = "white" {}
-        [NoScaleOffset] _Mask("Mask",2D) = "white" {}
-        _Color("Color", color) = (1,1,1,1)
-        [Space(10)]
-        [Header(Behaviour)]
-        [Space]
-        _ScrollDirX("Scroll along X", Range(-1,1)) = 1.
-        _ScrollDirY("Scroll along Y", Range(-1,1)) = 1
-        _Speed("Speed", float) = 1
-        _Distance("Fading Distance", Range(1,10)) = 1
+      _MainTex ("Texture", 2D) = "white" {}
+        _Ambient ("Ambient", Range(0., 1.)) = 0.2
+        [Header(Waves)]
+        _WaveSpeed("Speed", float) = 0.0
+        _WaveStrength("Strength", Range(0.0, 1.0)) = 0.0 
     }
     SubShader
     {
