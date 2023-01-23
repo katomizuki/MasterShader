@@ -65,10 +65,10 @@ Shader "Unlit/ToonWave"
                     for (int x = -1; x <= 1; x++)
                     {
                         float2 neighbor = float2(x, y);
-                        // 点のx,y座標
+                        // 点のx,y座標 この0.5は0 ~ 1に丸め込んでいる。
                         float2 p = 0.5 + 0.5 * sin(random2(ist + neighbor) + _Time.x * _WaveSpeed);
                         // 点と処理対象のピクセルとの距離ベクトル
-                        float2 diff = neighbor + p - fst;
+                        float2 diff = (neighbor + p) - (0 + fst);
                         m_dist = min(m_dist, length(diff));
                         waveColor = lerp(_WaterColor, _FoamColor, smoothstep(1 - _FoamPower,1, m_dist));
                     }
