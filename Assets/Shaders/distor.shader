@@ -47,6 +47,7 @@ Shader "Unlit/distor"
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
                 /// 描画結果のGrabTextureのテクスチャ座標を使って、後々サンプリングするためにこれをしておく。 （プラットフォーム間の違いを吸収）
+                /// 引数にクリップ空間を入れる。
                 o.grabPos = ComputeGrabScreenPos(o.vertex);
                 //NDC空間のxy=>0 ~ wに変換される =>要はクリップ空間(-w~w)を0~wにする。
                 
